@@ -1,5 +1,8 @@
 from database import *
 
-
+s=input()
+s=s.split();
 #testing
-print(opcode["add"][0])
+if (s[0]=="add"):
+    print(opcode["add"][0])
+    

@@ -53,7 +53,6 @@ def decode_A(pc):
                     error[pc]=-7
         else:
             error[pc]=-6
-        #print(program)
     except:
         print("error in decode_A")
 
@@ -73,7 +72,7 @@ def decode_B(pc):
                 error[pc]=-8
         else:
             error[pc]=-6
-        print(program)    
+        #print(program)    
     except:
         print("error in decode_B")
 

@@ -1,9 +1,10 @@
 #Opcode table containing all op op-cpdes
 #("opcode":("binary_value,type"))
-opcode={
+opcode_table={
     "add"   :   ("00000",0),
     "sub"   :   ("00001",0),
-    "mov"   :   (("00010",1),("00011",2)),
+    "movi"  :   ("00010",1),
+    "mov"   :   ("00011",2),
     "ld"    :   ("00100",3),
     "st"    :   ("00101",3),
     "mul"   :   ("00110",0),
@@ -18,8 +19,19 @@ opcode={
     "jmp"   :   ("01111",4),
     "jlt"   :   ("10000",4),
     "jgt"   :   ("10001",4),
-    "je"    :   ("10010",4),
-    "hlt"   :   ("10011",5)
+    "je"    :   ("10010",4)
+    # "hlt"   :   ("10011",5)
+}
+
+error_table={
+    -1: "Error: Typo Error at line: ",
+    -2: "Error: Invalid var declaration at line: ",
+    -3: "Error: Opcode can be used as label at line: ",
+    -4: "Error: variable cannot be initialised in between at line ",
+    -5: "Error: hlt cannot be used between program at line ",
+    -6: "Error: Syntax error at line ",
+    -7: "Error: not a valid resister at line ",
+    -8: "Error: Invalid immediate Value/notation at line "
 }
 
 # Discription of different type of opcodes
@@ -33,4 +45,14 @@ types={
     5:  (0,False,False)
 }
 
+register_list={
+    "R0":   "000",
+    "R1":   "001",
+    "R2":   "010",
+    "R3":   "011",
+    "R4":   "100",
+    "R5":   "101",
+    "R6":   "110",
+    #"FLAGS":"111"
+    }
 

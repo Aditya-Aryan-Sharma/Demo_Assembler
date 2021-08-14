@@ -119,7 +119,7 @@ def decode_D(pc):
                 error[pc]=-9
         else:
             error[pc]=-6
-        print(program)
+        # print(program)
     except:
         print("error in decode_D")
 

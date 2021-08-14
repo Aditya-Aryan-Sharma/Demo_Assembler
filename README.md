@@ -1,9 +1,6 @@
 # CO M21 Assignment
-<<<<<<< HEAD
 ->Rahul Agrawal			->Rahul Kumar		->Aditya Aryan Sharma	
 =======
-->Rahul Agrawal	->Rahul Kumar	->Aditya Aryan Sharma
->>>>>>> cdb25659118ac9767c5ee62430d3ade84a8136e9
 Private repository for Computer Organization, Monsoon 2021 semester, assignment at IIITD
 
 ## Adding code

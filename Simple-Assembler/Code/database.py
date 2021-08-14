@@ -24,9 +24,9 @@ opcode_table={
 }
 
 error_table={
-    -1: "Error: Typo Error at line: ",
-    -2: "Error: Invalid var declaration at line: ",
-    -3: "Error: Opcode can be used as label at line: ",
+    -1: "Error: Typo Error at line ",
+    -2: "Error: Invalid var declaration at line ",
+    -3: "Error: Opcode can be used as label at line ",
     -4: "Error: variable cannot be initialised in between at line ",
     -5: "Error: hlt cannot be used between program at line ",
     -6: "Error: Syntax not followed at line ",
@@ -39,7 +39,10 @@ error_table={
     -13:"Error: Hlt statement missing at line ",
     -14:"Error: same variable name cannot be used at line ",
     -15:"Error: same label name cannot be used at line ",
-    -16:"Error: label name cannot be null at line "
+    -16:"Error: label name cannot be null at line ",
+    -17:"Error: Opcodes cannot be used as variable at line ",
+    -18:"Error: registers cannot be used as variable at line ",
+    -19:"Error: registors cannot be used as label at line "
 }
 
 # Discription of different type of opcodes

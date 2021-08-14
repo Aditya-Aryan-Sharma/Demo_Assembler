@@ -171,8 +171,10 @@ def filter_labels():
                     error[i]=-15
                 elif(len(program[i])<2):
                     error[i]=-16
-                elif(first_str[0:-1] in opcode_table):
+                elif(first_str[0:-1] in opcode_table.keys()):
                     error[i]=-3
+                elif(first_str[0:-1] in register_list.keys()):
+                    error[i]=-19
                 else:
                     labels[first_str[0:-1]]=i
                     program[i].remove(first_str)
@@ -191,7 +193,11 @@ def filter_var():
         PC=0
         while(program[PC][0]=="var"):
             if(len(program[PC])==2):
-                if(program[PC][1] in variables):
+                if(program[PC][1] in opcode_table.keys()):
+                    error[PC]=-17
+                elif(program[PC][1] in register_list.keys()):
+                    error[PC]=-18
+                elif(program[PC][1] in variables):
                     error[PC]=-14
                 else:
                     variables.append(program[PC][1])

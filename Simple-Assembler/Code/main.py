@@ -81,10 +81,47 @@ def decode_B(pc):
         print("error in decode_B")
 
 def decode_C(pc):
-    return
+    try:
+        global program
+        if(len(program[pc])==3):
+            program[pc][0]=opcode_table[program[pc][0]][0]+"00000"
+            if (program[pc][1] in register_list.keys()):
+                program[pc][1]=register_list[program[pc][1]]
+            if (program[pc][2] in register_list.keys()) or (program[pc][2]=="FLAGS"):
+                if program[pc][2]=="FLAGS":
+                    program[pc][2]="111"
+                else:
+                    program[pc][2]=register_list[program[pc][2]]
+            else:
+                error[pc]=-7
+        else:
+            error[pc]=-6
+        # print(program)
+    except:
+        ("error in decode_C")
 
 def decode_D(pc):
-    return
+    try:
+        global program
+        global variables
+        global labels
+        if(len(program[pc])==3):
+            program[pc][0]=opcode_table[program[pc][0]][0]
+            if(program[pc][1] in register_list):
+                program[pc][1]=register_list[program[pc][1]]
+            else:
+                error[pc]=-7
+            if(program[pc][2] in variables):
+                program[pc][2]=decimal_to_binary(len(program)-len(variables)+variables.index(program[pc][2]))
+            elif (program[pc][2] in labels):
+                error[pc]=-10
+            else:
+                error[pc]=-9
+        else:
+            error[pc]=-6
+        # print(program)
+    except:
+        print("error in decode_D")
 
 def decode_E(pc):
     try:

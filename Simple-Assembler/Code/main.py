@@ -49,6 +49,7 @@ def decode_A(pc):
         if(len(program[pc])==4):
             program[pc][0]=opcode_table[program[pc][0]][0]+"00"         #setting the opcode for formate A
             for i in range(1,4):
+                print(program[pc][i])
                 if program[pc][i] in register_list.keys():
                     program[pc][i]=register_list[program[pc][i]]        #setting the resistors code 
                 else:
@@ -65,11 +66,13 @@ def decode_B(pc):
         if(len(program[pc])==3):
             program[pc][0]=opcode_table[program[pc][0]][0]
             if program[pc][1] in register_list.keys():
+                print(program[pc][1])
                 program[pc][1]=register_list[program[pc][1]]
             else:
                 error[pc]=-7
             if program[pc][2][0]=="$" and int(program[pc][2][1:])>=0 and int(program[pc][2][1:])<=255:
                 program[pc][2]=decimal_to_binary(int(program[pc][2][1:]))
+                print(program[pc][2])
             else:
                 error[pc]=-8
         else:
@@ -98,7 +101,10 @@ def decode_C(pc):
         # print(program)
     except:
         ("error in decode_C")
+<<<<<<< HEAD
 
+=======
+>>>>>>> cdb25659118ac9767c5ee62430d3ade84a8136e9
 
 def decode_D(pc):
     try:
@@ -122,7 +128,10 @@ def decode_D(pc):
         # print(program)
     except:
         print("error in decode_D")
+<<<<<<< HEAD
 
+=======
+>>>>>>> cdb25659118ac9767c5ee62430d3ade84a8136e9
 
 def decode_E(pc):
     try:
@@ -166,6 +175,7 @@ def filter_labels():
         i=PC
         while(i<len(program)):
             first_str=program[i][0]
+            print(first_str)
             if(first_str[-1]==":"):
                 if(first_str[0:-1] in labels.keys()):
                     error[i]=-15
@@ -216,6 +226,7 @@ def main():
     variables=[]
     program=[]
     error={}
+<<<<<<< HEAD
             #uncomment to run manually
     # for i in range(0,22):
     #     s=list(input().split())
@@ -248,6 +259,27 @@ def main():
         for j in program[i]:
             binary=binary+j
         print(binary)
+=======
+    for i in range(1,5):
+        s=list(input().split(" "))
+        if s[0]=="":
+            s.remove("")
+        program.append(s)
+    # while True:
+    #     try:
+    #         s=tuple(input().split(" "))
+    #         program+=(s,)
+    #     except EOFError:
+    #         break
+    print(program," -->")
+    filter_var()
+    filter_labels()
+    opcode_fetch()
+    print(variables," --variables")
+    print(labels," --labels")
+    print(error," --error")
+    print(program," -->")
+>>>>>>> cdb25659118ac9767c5ee62430d3ade84a8136e9
     
 
 if __name__=="__main__":

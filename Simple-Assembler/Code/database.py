@@ -20,7 +20,7 @@ opcode_table={
     "jlt"   :   ("10000",4),
     "jgt"   :   ("10001",4),
     "je"    :   ("10010",4)
-    # "hlt"   :   ("10011",5)
+    # "hlt"   :   ("10011",5) 
 }
 
 error_table={
@@ -29,9 +29,17 @@ error_table={
     -3: "Error: Opcode can be used as label at line: ",
     -4: "Error: variable cannot be initialised in between at line ",
     -5: "Error: hlt cannot be used between program at line ",
-    -6: "Error: Syntax error at line ",
+    -6: "Error: Syntax not followed at line ",
     -7: "Error: not a valid resister at line ",
-    -8: "Error: Invalid immediate Value/notation at line "
+    -8: "Error: Invalid immediate Value/notation (correct->$value [0<=value<=255]) at line ",
+    -9: "Error: Invalid variable used at line ",
+    -10:"Error: labels cannot be used as variables at line ",
+    -11:"Error: Variables cannot be used as labels at line ",
+    -12:"Error: label not defined at line ",
+    -13:"Error: Hlt statement missing at line ",
+    -14:"Error: same variable name cannot be used at line ",
+    -15:"Error: same label name cannot be used at line ",
+    -16:"Error: label name cannot be null at line "
 }
 
 # Discription of different type of opcodes

@@ -47,6 +47,7 @@ def decode_A(pc):
         if(len(program[pc])==4):
             program[pc][0]=opcode_table[program[pc][0]][0]+"00"         #setting the opcode for formate A
             for i in range(1,4):
+                print(program[pc][i])
                 if program[pc][i] in register_list.keys():
                     program[pc][i]=register_list[program[pc][i]]        #setting the resistors code 
                 else:
@@ -64,11 +65,13 @@ def decode_B(pc):
         if(len(program[pc])==3):
             program[pc][0]=opcode_table[program[pc][0]][0]
             if program[pc][1] in register_list.keys():
+                print(program[pc][1])
                 program[pc][1]=register_list[program[pc][1]]
             else:
                 error[pc]=-7
             if program[pc][2][0]=="$" and int(program[pc][2][1:])>=0 and int(program[pc][2][1:])<=255:
                 program[pc][2]=decimal_to_binary(int(program[pc][2][1:]))
+                print(program[pc][2])
             else:
                 error[pc]=-8
         else:
@@ -84,10 +87,34 @@ def decode_D(pc):
     return
 
 def decode_E(pc):
-    return
+    try:
+        global program
+        global labels
+        global variables
+        if len(program[pc])==2:
+            program[pc][0]=opcode_table[program[pc][0]][0]+"000"
+            if (program[pc][1] in labels.keys()):
+                program[pc][1]=decimal_to_binary(labels[program[pc][1]]-len(variables))
+            elif (program[pc][1] in variables):
+                error[pc]=-11
+            else:
+                error[pc]=-12
+        else:
+            error[pc]=-6
+    except:
+        print("error in decode_E")
+
 
 def decode_F(pc):
-    return
+    try:
+        global program
+        global error
+        if (len(program[pc]) == 1) and (program[pc][0] == "hlt"):
+                program[pc][0] = "1001100000000000"
+        else:
+            error[pc] =-13
+    except:
+        print("error in decode_F")
 
 
 #filters labels and save their location in dictionary
@@ -101,6 +128,7 @@ def filter_labels():
         i=PC
         while(i<len(program)):
             first_str=program[i][0]
+            print(first_str)
             if(first_str[-1]==":"):
                 if(first_str[0:-1] in opcode_table):
                     error[i]=-3
@@ -149,11 +177,14 @@ def main():
     #         program+=(s,)
     #     except EOFError:
     #         break
-    print(program)
+    print(program," -->")
     filter_var()
     filter_labels()
     opcode_fetch()
-    print(variables,labels,error)
+    print(variables," --variables")
+    print(labels," --labels")
+    print(error," --error")
+    print(program," -->")
     
 
 if __name__=="__main__":

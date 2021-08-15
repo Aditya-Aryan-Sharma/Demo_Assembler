@@ -40,7 +40,7 @@ def opcode_fetch():
             PC+=1
         decode_F(PC)
     except:
-        print("error in opcode_fetch")
+        print("General Error: error in opcode_fetch")
 
 
 def decode_A(pc):
@@ -56,7 +56,7 @@ def decode_A(pc):
         else:
             error[pc]=-6
     except:
-        print("error in decode_A")
+        print("General Error: error in decode_A")
 
 
 def decode_B(pc):
@@ -76,7 +76,7 @@ def decode_B(pc):
             error[pc]=-6
         #print(program)    
     except:
-        print("error in decode_B")
+        print("General Error: error in decode_B")
 
 
 def decode_C(pc):
@@ -97,7 +97,7 @@ def decode_C(pc):
             error[pc]=-6
         # print(program)
     except:
-        ("error in decode_C")
+        ("General Error: error in decode_C")
 
 
 def decode_D(pc):
@@ -121,7 +121,7 @@ def decode_D(pc):
             error[pc]=-6
         # print(program)
     except:
-        print("error in decode_D")
+        print("General Error: error in decode_D")
 
 
 def decode_E(pc):
@@ -140,7 +140,7 @@ def decode_E(pc):
         else:
             error[pc]=-6
     except:
-        print("error in decode_E")
+        print("General Error: error in decode_E")
 
 
 def decode_F(pc):
@@ -152,7 +152,7 @@ def decode_F(pc):
         else:
             error[pc] =-13
     except:
-        print("error in decode_F")
+        print("General Error: error in decode_F")
 
 
 #filters labels and save their location in dictionary
@@ -180,7 +180,7 @@ def filter_labels():
                     program[i].remove(first_str)
             i+=1
     except:
-        print("Error in filter labels")
+        print("General Error: error in filter labels")
 
 
 # filters variabls at the starting and addning them to variables list
@@ -205,7 +205,7 @@ def filter_var():
                 error[PC]=-2
             PC+=1
     except:
-        print("Error in filtering error.")
+        print("General Error: Error in filtering error.")
 
 
 def print_error():

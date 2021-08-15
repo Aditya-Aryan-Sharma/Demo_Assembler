@@ -197,7 +197,7 @@ def filter_var():
                     error[PC]=-17
                 elif(program[PC][1] in register_list.keys()):
                     error[PC]=-18
-                elif(program[PC][1] in variables):
+                if(program[PC][1] in variables):
                     error[PC]=-14
                 else:
                     variables.append(program[PC][1])

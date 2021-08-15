@@ -35,7 +35,7 @@ error_table={
     -9: "Error: Invalid variable used at line ",
     -10:"Error: labels cannot be used as variables at line ",
     -11:"Error: Variables cannot be used as labels at line ",
-    -12:"Error: label not defined at line ",
+    -12:"Error: label used not defined at line ",
     -13:"Error: Hlt statement missing at line ",
     -14:"Error: same variable name cannot be used at line ",
     -15:"Error: same label name cannot be used at line ",

@@ -1,6 +1,6 @@
 global MEM
 global PC
-global register
+global register_file
 global halted
 
 def binary_to_decimal(str):
@@ -19,38 +19,40 @@ def decimal_to_binary(n, p):
         n=n//2
     return s
 
-#Add, subtract, multiply and divide instruction
+#Add, subtract, multiply and divide instruction=> Aditya
 #opcode_code=> 0,1,6,7
 def ASMD(operands,opcode_code):
-    global PC
     print(operands)
-    PC+=1
+    return
 
-#mov instruction both imm and registers
+#mov instruction both imm and register_files=> Aditya
 #opcode_code=> 2 & 3
 def mov(operands,opcode_code):
     print("mov")
     return 
 
-#load and store instructions
+#load and store instructions=> RA
 #opcode_code=> 4 & 5
 def load_store(operands,opcode_code):
     print("load_store")
-    return
+    try:
+        #code
+    except:
+        print("error in load store")
 
-#shift and Logical operations
+#shift and Logical operations=> RK
 #opcode_code=> 8, 9, 10, 11, 12 & 13
 def shift_logical(operands,opcode_code):
     print("shift_logic")
     return
 
-#compare instruction
+#compare instruction=> RK
 #opcode_code=> 14
 def compare(operands,opcode_code):
     print("compare")
     return
 
-#jump instruction
+#jump instruction=> RA
 #opcode_code=> 15, 16, 17 & 18
 def jump(operands,opcode_code):
     print("jump")
@@ -68,7 +70,7 @@ def halt(operands,opcode_code):
 def execute(inst):
     global MEM
     global PC
-    global register
+    global register_file
     fun=[ASMD]*2+[mov]*2+[load_store]*2+[ASMD]*2+[shift_logical]*6+[compare]+[jump]*4+[halt]
     opcode_code=binary_to_decimal(inst[0:5])
     fun[opcode_code](inst[5:],opcode_code)
@@ -76,13 +78,13 @@ def execute(inst):
     
 
 def main():
-    global register
+    global register_file
     global PC
     global MEM
     global halted
     halted=False
     MEM=[]
-    register={0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:[0,0,0,0]} #<-Flag:[V,L,G,E]
+    register_file={0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:[0,0,0,0]} #<-Flag:[V,L,G,E]
     PC=0
             #uncomment to run manually
     for i in range(0,8):

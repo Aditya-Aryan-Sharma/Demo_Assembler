@@ -47,19 +47,118 @@ def load_store(operands,opcode_code):
     except:
         print("error in load store")
     PC+=1
+    
 
 #shift and Logical operations=> RK
 #opcode_code=> 8, 9, 10, 11, 12 & 13
-def shift_logical(operands,opcode_code):
-    print("shift_logic")
-    return
+def shift_logical(operands, opcode_code):
+    global PC
+    global register_file
+    try:
+        if opcode_code == 9:    #lshift
+            reg = binary_to_decimal((operands[0:3]))  # finding the register which is to modified
+            imm = binary_to_decimal((operands[3:]))  # calculating immediate value
+            reg_value = register_file[reg]
+            output = (2 ** imm) * reg_value
+            
+            if output > 255:
+                while output>255:
+                    
+                    output=output-255
+                register_file[reg]=output
 
-#compare instruction=> RK
-#opcode_code=> 14
-def compare(operands,opcode_code):
-    print("compare")
-    return
+                register_file[7][0] = 1
+            else:
+                register_file[reg] = output
+        elif opcode_code == 8:  #rshift
+            reg = binary_to_decimal((operands[0:3]))  # finding the register which is to modified
+            imm = binary_to_decimal((operands[3:]))  # calculating immediate value
+            reg_value = register_file[reg]
+            output = int(reg_value / (2 ** imm))
+            if output > 255:
+                while output > 255:
+                    output = output - 255
+                register_file[reg] = output
 
+                register_file[7][0] = 1
+            else:
+                register_file[reg] = output
+        elif opcode_code == 10:  #xor
+            reg1 = binary_to_decimal(operands[2:5])
+            reg2 = binary_to_decimal(operands[5:8])
+            reg3 = binary_to_decimal(operands[8:])
+            value_of_reg2 = register_file[reg2]
+            value_of_reg3 = register_file[reg3]
+            output=value_of_reg2^value_of_reg3
+            if output > 255:
+                while output > 255:
+                    output = output - 255
+                register_file[reg1] = output
+
+                register_file[7][0] = 1
+            else:
+                register_file[reg1] = output
+        elif opcode_code==11:  #or
+            reg1 = binary_to_decimal(operands[2:5])
+            reg2 = binary_to_decimal(operands[5:8])
+            reg3 = binary_to_decimal(operands[8:])
+            value_of_reg2 = register_file[reg2]
+            value_of_reg3 = register_file[reg3]
+            output=value_of_reg2|value_of_reg3
+            if output > 255:
+                while output > 255:
+                    output = output - 255
+                register_file[reg1] = output
+
+                register_file[7][0] = 1
+            else:
+                register_file[reg1] = output
+        elif opcode_code==12:   #and
+            reg1 = binary_to_decimal(operands[2:5])
+            reg2 = binary_to_decimal(operands[5:8])
+            reg3 = binary_to_decimal(operands[8:])
+            value_of_reg2 = register_file[reg2]
+            value_of_reg3 = register_file[reg3]
+            output = value_of_reg2 & value_of_reg3
+            if output > 255:
+                while output > 255:
+                    output = output - 255
+                register_file[reg1] = output
+
+                register_file[7][0] = 1
+            else:
+                register_file[reg1] = output
+        elif opcode_code==13:
+            reg1 = binary_to_decimal(operands[5:8])#finding register which has to be modified
+            reg2 = binary_to_decimal(operands[8:])
+            #leaving for RA
+        PC=PC+1
+    except:
+        print("Error in Shift or Logical Operation")
+
+
+# compare instruction=> RK
+# opcode_code=> 14
+
+def compare(operands, opcode_code):
+    global register_file
+    global PC
+    try:
+        if opcode_code==14:
+            reg1 = register_file[binary_to_decimal(operands[5:8])]   # finding register which has to be modified
+            reg2 = register_file[binary_to_decimal(operands[8:])]
+            
+            if reg1==reg2:
+                register_file[7][3]=1
+            elif (reg1>reg2):
+                register_file[7][2] = 1
+            elif reg1<reg2:
+                register_file[7][1] = 1
+            PC=PC+1
+
+
+    except:
+        print("Error in compare")
 #jump instruction=> RA
 #opcode_code=> 15, 16, 17 & 18
 def jump(operands,opcode_code):

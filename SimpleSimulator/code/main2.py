@@ -26,6 +26,7 @@ def ASMD(operands,opcode_code):
     global register_file
     global PC
     try:
+        register_file[7]=[0,0,0,0]
         reg1=binary_to_decimal(operands[2:5])
         reg2=binary_to_decimal(operands[5:8])
         reg3=binary_to_decimal(operands[8:])
@@ -53,7 +54,6 @@ def ASMD(operands,opcode_code):
     except:
         print("error in ASMD")
     finally:
-        register_file[7]=[0,0,0,0]
         PC+=1
 
 #mov instruction both imm and register_file=> Aditya
@@ -114,13 +114,7 @@ def shift_logical(operands, opcode_code):
             imm = binary_to_decimal((operands[3:]))  # calculating immediate value
             reg_value = register_file[reg]
             output = (2 ** imm) * reg_value
-            if output > 255:
-                while output>255:
-                    output=output % 256
-                register_file[reg]=output
-                register_file[7][0] = 1
-            else:
-                register_file[reg] = output
+            register_file[reg] = output
         elif opcode_code == 8:  #rshift
             reg = binary_to_decimal((operands[0:3]))  # finding the register which is to modified
             imm = binary_to_decimal((operands[3:]))  # calculating immediate value
@@ -173,6 +167,7 @@ def compare(operands, opcode_code):
     global register_file
     global PC
     try:
+        register_file[7]=[0,0,0,0]
         if opcode_code==14:
             reg1 = register_file[binary_to_decimal(operands[5:8])]   # finding register which has to be modified
             reg2 = register_file[binary_to_decimal(operands[8:])]

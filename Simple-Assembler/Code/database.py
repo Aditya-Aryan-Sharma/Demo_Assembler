@@ -24,13 +24,13 @@ opcode_table={
 }
 
 error_table={
-    -1: "Error: Typo Error at line ",
+    -1: "Error: NOT a Valid Opcode at line ",
     -2: "Error: Invalid var declaration at line ",
-    -3: "Error: Opcode can be used as label at line ",
-    -4: "Error: variable cannot be initialised in between at line ",
-    -5: "Error: hlt cannot be used between program at line ",
-    -6: "Error: Syntax not followed at line ",
-    -7: "Error: not a valid resister at line ",
+    -3: "Error: Opcode CANNOT be used as label at line ",
+    -4: "Error: Variable CANNOT be initialised between program at line ",
+    -5: "Error: 'hlt' CANNOT be used between program at line ",
+    -6: "Error: Syntax NOT followed at line ",
+    -7: "Error: Invalid register used at line ",
     -8: "Error: Invalid immediate Value/notation (correct->$value [0<=value<=255]) at line ",
     -9: "Error: Invalid variable used at line ",
     -10:"Error: labels cannot be used as variables at line ",

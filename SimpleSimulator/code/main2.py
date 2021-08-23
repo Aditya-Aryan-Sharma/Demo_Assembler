@@ -32,8 +32,8 @@ def ASMD(operands,opcode_code):
             reg2=binary_to_decimal(operands[5:8])
             reg3=binary_to_decimal(operands[8:len(operands)])
             if opcode_code==0:
-                if register_file[reg2]+register_file[reg3]>255:
-                    register_file[reg1]=(register_file[reg2]*register_file[reg3])%256
+                if (register_file[reg2]+register_file[reg3]) >255:
+                    register_file[reg1]=(register_file[reg2]+register_file[reg3]) % 256
                     register_file[7][0]=1
                 else:
                     register_file[reg1]=register_file[reg2]+register_file[reg3]
@@ -45,19 +45,19 @@ def ASMD(operands,opcode_code):
                     register_file[reg1]=register_file[reg2]-register_file[reg3]
             elif opcode_code==6:
                 if register_file[reg2]*register_file[reg3]>255:
-                    register_file[reg1]=(register_file[reg2]*register_file[reg3])%256
+                    register_file[reg1]=(register_file[reg2]*register_file[reg3]) % 256
                     register_file[7][0]=1
                 else:
                     register_file[reg1]=register_file[reg2]*register_file[reg3]  
         elif opcode_code==7:
             reg3=binary_to_decimal(operands[5:8])
             reg4=binary_to_decimal(operands[8:len(operands)])
-            register_file[0]=register_file[reg3]//register_file[reg4]
-            register_file[1]=register_file[reg3]%register_file[reg4] 
+            register_file[0]=register_file[reg3] // register_file[reg4]
+            register_file[1]=register_file[reg3] % register_file[reg4] 
     except:
         print("error in ASMD")
     finally:
-        PC=PC+1    
+        PC=PC+1
 
 #mov instruction both imm and register_file=> Aditya
 #opcode_code=> 2 & 3

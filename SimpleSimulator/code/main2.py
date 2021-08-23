@@ -20,12 +20,12 @@ def decimal_to_binary(n, p):
     return s
 
 #Add, subtract, multiply and divide instruction=> Aditya
-#opcode_code=> 0,1,6,7
+#opcode_code=> 0, 1, 6, 7
 def ASMD(operands,opcode_code):
-    print(operands)
+    print("ASMD")
     return
 
-#mov instruction both imm and register_files=> Aditya
+#mov instruction both imm and register_file=> Aditya
 #opcode_code=> 2 & 3
 def mov(operands,opcode_code):
     print("mov")
@@ -35,8 +35,19 @@ def mov(operands,opcode_code):
 #opcode_code=> 4 & 5
 def load_store(operands,opcode_code):
     print("load_store")
-    return
-    #try except removed due to errors
+    try:
+        global PC
+        global MEM
+        reg=operands[0:3]
+        mem_add=operands[3:]
+        if opcode_code==4:
+            register_file[binary_to_decimal(reg)]=binary_to_decimal(MEM[binary_to_decimal(mem_add)])
+        elif opcode_code==5:
+            MEM[binary_to_decimal(mem_add)]=decimal_to_binary(register_file[reg],16)
+    except:
+        print("error in load store")
+    PC+=1
+    
 
 #shift and Logical operations=> RK
 #opcode_code=> 8, 9, 10, 11, 12 & 13
@@ -152,7 +163,22 @@ def compare(operands, opcode_code):
 #opcode_code=> 15, 16, 17 & 18
 def jump(operands,opcode_code):
     print("jump")
-    return
+    try:
+        global PC
+        global register_file
+        new_PC=binary_to_decimal(operands[3:])
+        if opcode_code==15:
+            PC=new_PC
+        elif (opcode_code==16) and (register_file[7][1]==1):
+            PC=new_PC
+        elif (opcode_code==17) and (register_file[7][2]==1):
+            PC=new_PC
+        elif (opcode_code==18) and (register_file[7][3]==1):
+            PC=new_PC
+        else:
+            PC+=1
+    except:
+        print("error in jump")
 
 #halt instruction
 #opcode_code=> 19
@@ -171,7 +197,6 @@ def execute(inst):
     opcode_code=binary_to_decimal(inst[0:5])
     fun[opcode_code](inst[5:],opcode_code)
     PC+=1
-    
 
 def main():
     global register_file

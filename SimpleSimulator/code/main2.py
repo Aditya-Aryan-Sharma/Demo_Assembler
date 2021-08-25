@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 global MEM
 global PC
 global register_file
@@ -238,20 +240,28 @@ def execute(inst):
     print("0"*12+str(a[0])+str(a[1])+str(a[2])+str(a[3]))
 
 
+def plot_label_save():
+    plt.xlabel("Cycle")
+    plt.ylabel("Address")
+    plt.title("Memory Accesses v/s Cycles")
+    plt.savefig("./plots/PLOT.png",dpi=300)
+
+
 def main():
     global register_file
     global PC
     global MEM
     global halted
+    clock=1
     halted=False
     MEM=[]
     register_file={0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:[0,0,0,0]} #<-Flag:[V,L,G,E]
     PC=0
             #uncomment to run manually
-    # for i in range(0,3):
+    # for i in range(0,7):
     #     s=input()
     #     MEM.append(s)
-            #uncomment for Automated testing
+            #  uncomment for Automated testing
     while True:
         try:
             s=input()
@@ -262,7 +272,10 @@ def main():
     while(len(MEM)<256):
         MEM.append("0"*16)
     while(not halted):
+        # plt.scatter(clock,PC,c="blue")            # Uncomment for PLOT
         execute(MEM[PC])
+    #     clock+=1                                  # Uncomment for PLOT
+    # plot_label_save()                             # Uncomment for PLOT  
     for j in MEM:
         print(j)
 

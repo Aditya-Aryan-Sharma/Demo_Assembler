@@ -93,13 +93,16 @@ def load_store(operands,opcode_code):
     global PC
     global MEM
     global register_file
+    global clock
     try:
         reg=binary_to_decimal(operands[0:3])
         mem_add=operands[3:]
         if opcode_code==4:
             register_file[reg]=binary_to_decimal(MEM[binary_to_decimal(mem_add)])
+            plt.scatter(clock,binary_to_decimal(mem_add),c="blue")
         elif opcode_code==5:
             MEM[binary_to_decimal(mem_add)]=decimal_to_binary(register_file[reg],16)
+            plt.scatter(clock,binary_to_decimal(mem_add),c="blue")
     except:
         print("error in load store")
     finally:
@@ -252,6 +255,7 @@ def main():
     global PC
     global MEM
     global halted
+    global clock
     clock=1
     halted=False
     MEM=[]
@@ -272,9 +276,9 @@ def main():
     while(len(MEM)<256):
         MEM.append("0"*16)
     while(not halted):
-        # plt.scatter(clock,PC,c="blue")            # Uncomment for PLOT
+        plt.scatter(clock,PC,c="blue")
         execute(MEM[PC])
-    #     clock+=1                                  # Uncomment for PLOT
+        clock+=1
     # plot_label_save()                             # Uncomment for PLOT  
     for j in MEM:
         print(j)

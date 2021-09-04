@@ -247,7 +247,7 @@ def plot_label_save():
     plt.xlabel("Cycle")
     plt.ylabel("Address")
     plt.title("Memory Accesses v/s Cycles")
-    plt.savefig("./plots/PLOT.png",dpi=300)
+    plt.savefig("PLOT.png",dpi=300)
 
 
 def main():
@@ -262,7 +262,7 @@ def main():
     register_file={0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:[0,0,0,0]} #<-Flag:[V,L,G,E]
     PC=0
             #uncomment to run manually
-    # for i in range(0,7):
+    # for i in range(0,256):
     #     s=input()
     #     MEM.append(s)
             #  uncomment for Automated testing
@@ -279,7 +279,7 @@ def main():
         plt.scatter(clock,PC,c="blue")
         execute(MEM[PC])
         clock+=1
-    # plot_label_save()                             # Uncomment for PLOT  
+    plot_label_save()                             # Uncomment for PLOT  
     for j in MEM:
         print(j)
 

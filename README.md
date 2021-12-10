@@ -1,4 +1,4 @@
-# CO M21 Assignment
+# Project for Computer Organisation 
 ->Rahul Agrawal			->Rahul Kumar		->Aditya Aryan Sharma	
 =======
 Private repository for Computer Organization, Monsoon 2021 semester, assignment at IIITD
